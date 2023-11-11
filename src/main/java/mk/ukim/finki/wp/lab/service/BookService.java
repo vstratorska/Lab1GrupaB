@@ -10,4 +10,7 @@ public interface BookService {
     List<Book> listBooks();
     Author addAuthorToBook(Long authorId, String isbn);
     Book findBookByIsbn(String isbn);
+
+    public Book deleteAuthors(Book book);
+
 }

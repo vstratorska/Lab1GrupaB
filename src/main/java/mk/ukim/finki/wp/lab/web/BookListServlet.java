@@ -40,7 +40,11 @@ public class BookListServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         getServletContext().setAttribute("isbn", req.getParameter("bookIsbn"));
-        resp.sendRedirect("/author");
+        
+        String n=req.getParameter("del");
+        if(n!=null)
+        resp.sendRedirect("/new");
+        else resp.sendRedirect("/author");
     }
 
 }

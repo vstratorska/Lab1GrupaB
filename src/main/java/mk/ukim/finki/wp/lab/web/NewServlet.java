@@ -15,19 +15,21 @@ import org.thymeleaf.web.servlet.JakartaServletWebApplication;
 
 import java.io.IOException;
 
-@WebServlet(name = "bookDetailsServlet", urlPatterns = "/details")
-public class bookDetails extends HttpServlet {
+@WebServlet(urlPatterns = "/new")
+public class NewServlet extends HttpServlet {
+
+
 
     private final SpringTemplateEngine springTemplateEngine;
     private final BookService bookService;
     private final AuthorService authorService;
 
-
-    public bookDetails(SpringTemplateEngine springTemplateEngine, BookService bookService, AuthorService authorService) {
+    public NewServlet(SpringTemplateEngine springTemplateEngine, BookService bookService, AuthorService authorService) {
         this.springTemplateEngine = springTemplateEngine;
         this.bookService = bookService;
         this.authorService = authorService;
     }
+
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -37,11 +39,10 @@ public class bookDetails extends HttpServlet {
 
         WebContext context = new WebContext(webExchange);
 
-        Long id= (Long) getServletContext().getAttribute("id");
+
         String isbn= (String) getServletContext().getAttribute("isbn");
 
-        bookService.addAuthorToBook(id, isbn);
-        Book book=bookService.findBookByIsbn(isbn);
+        Book book=bookService.deleteAuthors(bookService.findBookByIsbn(isbn));
 
         context.setVariable("title", book.getTitle());
         context.setVariable("genre", book.getGenre());
@@ -49,6 +50,7 @@ public class bookDetails extends HttpServlet {
         context.setVariable("authors", book.getAuthors());
 
         springTemplateEngine.process("bookDetails.html",context,resp.getWriter());
+
     }
 
 

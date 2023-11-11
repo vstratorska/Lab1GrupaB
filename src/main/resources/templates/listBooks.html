@@ -18,11 +18,13 @@
 
 <form th:method="post" th:action="@{/listBooks}">
     <div th:each="b : ${books}">
-        <input type="radio" name="bookIsbn" th:value="${b.getIsbn()}" th:text =" 'Title: ' + ${b.getTitle()} + ' Genre: ' + ${b.getGenre()} + ' Year: '  + ${b.getYear()}" ></br>
+        <input type="radio" name="bookIsbn" th:value="${b.getIsbn()}" th:text =" 'Title: ' + ${b.getTitle()} + ' Genre: ' + ${b.getGenre()} + ' Year: '  + ${b.getYear()}" >
+        <input type="submit" value="delete" name="del"></br>
         </br>
     </div>
-    <input type='submit' th:value="Submit">
+    <input type='submit' th:value="Submit" name="sub">
 </form>
+
 
 </main>
 </body>

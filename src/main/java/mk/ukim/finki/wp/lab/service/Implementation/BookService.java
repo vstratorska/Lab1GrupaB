@@ -32,4 +32,11 @@ public class BookService implements mk.ukim.finki.wp.lab.service.BookService {
     public Book findBookByIsbn(String isbn) {
         return bookRepository.findByIsbn(isbn);
     }
+
+    @Override
+    public Book deleteAuthors(Book book) {
+      return bookRepository.deleteAuthors(book);
+    }
+
+
 }
